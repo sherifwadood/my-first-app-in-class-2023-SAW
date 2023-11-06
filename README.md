@@ -40,4 +40,14 @@ Run the unemployment report:
 python app/unemployment.py
 '''
 
+#API KEY
 
+
+Send an example email:
+
+'''sh
+python app/email_service.py
+'''
+
+
+python -m app.unemployment
