@@ -40,4 +40,12 @@ Run the unemployment report:
 python app/unemployment.py
 '''
 
+#API KEY
+# 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
+
+Send an example email:
+
+'''sh
+python app/email_service.py
+'''
 
