@@ -1,14 +1,19 @@
 
 import os
-from dotenv import load_dotenv 
-import requests
 import json
+
 from pprint import pprint
 from statistics import mean
+
+
+from dotenv import load_dotenv 
+import requests
 from plotly.express import line
 
 
 from getpass import getpass
+
+#enviorment variables and constants
 
 load_dotenv() # go look at .env for any enviornment vairables
 #API_KEY = getpass("Please input your AlphaVantage API Key: ")
@@ -40,7 +45,6 @@ print(f"{data[0]['value']}%", "as of", data[0]["date"])
 #
 # What is the average unemployment rate for all months during this calendar year?
 # ... How many months does this cover?
-
 
 this_year = [d for d in data if "2023-" in d["date"]]
 
