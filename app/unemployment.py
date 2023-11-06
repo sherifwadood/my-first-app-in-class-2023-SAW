@@ -1,9 +1,13 @@
 from getpass import getpass
+from dotenv import load_dotenv
 
-API_KEY = getpass("Please input your AlphaVantage API Key: ")
+load_dotenv()
+#API_KEY = getpass("Please input your AlphaVantage API Key: ")
 
-#import os
-#API_KEY = os.getenv("ALPHAVANTAGE_API_KEY")
+import os
+API_KEY = os.getenv("ALPHAVANTAGE_API_KEY")
+
+
 import requests
 import json
 from pprint import pprint

@@ -1,4 +1,4 @@
-# my-first-app-in-class-2023-SAW
+
 # my-first-app-in-class-2023-SAW
 
 ## Setup
@@ -18,8 +18,14 @@ pip install -r requirements.txt
 ##Usage
 
 
+Obtain an [API Key from Alphavantage](https://www.alphavantage.co/support/#api-key) or from the prof (`ALPHAVANTAGE_API_KEY`).
 
+Create a ".env" file and past ein the following contents:
 
+'''sh
+
+ALPHAVANTAGE_API_KEY="_____"
+'''
 ## Usage
 
 Run the example script:
@@ -35,4 +41,3 @@ python app/unemployment.py
 '''
 
 
-ALPHAVANTAGE_API_KEY="abc123" python app/unemployment.py
