@@ -51,3 +51,11 @@ python app/email_service.py
 
 
 python -m app.unemployment
+
+## Testing
+
+Run tests:
+
+```sh
+pytest
+```
