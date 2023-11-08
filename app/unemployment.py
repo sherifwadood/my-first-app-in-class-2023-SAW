@@ -70,11 +70,8 @@ rates = [float(d["value"]) for d in data]
 fig = line(x=dates, y=rates, title="United States Unemployment Rate over time", labels= {"x": "Month", "y": "Unemployment Rate"})
 fig.show()
 
-
-
 # EMAIL SENDING 
 user_address = input("Please enter your email address: ")
-
 
 content = f"""
 <h1> Unemployment Report Email </h1>
