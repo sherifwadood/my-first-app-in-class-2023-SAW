@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 import requests
 from plotly.express import line
 
-from app.email_service import send_email
+from email_service import send_email
 
 print("BACK IN UNEMPLOYMENT FILE")
 

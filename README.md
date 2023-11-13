@@ -50,7 +50,18 @@ python app/email_service.py
 '''
 
 
+Run weather
+
+python app/weather.py
+
 python -m app.unemployment
+
+### Web App
+
+Mac OS:
+'''sh
+FLASK_APP=web_app flask run
+'''
 
 ## Testing
 
