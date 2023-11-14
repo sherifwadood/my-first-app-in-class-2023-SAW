@@ -1,6 +1,30 @@
 
 # todo: write some python code here
 
+#Image Examples
+
+
+from IPython.display import Image, display
+
+print("-----------")
+print("EXAMPLE IMAGES:")
+
+print("-----------")
+image_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Georgetown_Hoyas_logo.svg/64px-Georgetown_Hoyas_logo.svg.png"
+display(Image(url=image_url))
+
+print("-----------")
+display(Image(url="https://www.python.org/static/community_logos/python-powered-w-200x80.png"))
+
+print("-----------")
+display(Image(url="https://api.weather.gov/icons/land/day/sct?size=medium"))
+
+
+
+
+DEGREE_SIGN = u"\N{DEGREE SIGN}"
+print(f"THE TEMPERATURE IS 90 {DEGREE_SIGN}F")
+
 import pgeocode
 
 nomi = pgeocode.Nominatim('US')
