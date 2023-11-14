@@ -51,8 +51,9 @@ python app/email_service.py
 
 
 Run weather
-
+'''sh
 python app/weather.py
+'''
 
 python -m app.unemployment
 
