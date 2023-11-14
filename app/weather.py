@@ -22,8 +22,8 @@ display(Image(url="https://api.weather.gov/icons/land/day/sct?size=medium"))
 
 
 
-DEGREE_SIGN = u"\N{DEGREE SIGN}"
-print(f"THE TEMPERATURE IS 90 {DEGREE_SIGN}F")
+degree_sign = u"\N{DEGREE SIGN}"
+print(f"THE TEMPERATURE IS 90 {degree_sign}F")
 
 import pgeocode
 
@@ -78,7 +78,7 @@ for period in daytime_periods:
     #print(period.keys())
     print("-------------")
     print(period["name"], period["startTime"][0:7])
-    print(period["shortForecast"], f"{period['temperature']} {DEGREE_SIGN}{period['temperatureUnit']}")
+    print(period["shortForecast"], f"{period['temperature']} {degree_sign}{period['temperatureUnit']}")
     #print(period["detailedForecast"])
     display(Image(url=period["icon"]))
 
