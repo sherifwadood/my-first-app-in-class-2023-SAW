@@ -14,5 +14,3 @@ pytest
 pgeocode
 
 flask
-
-
