@@ -10,16 +10,28 @@ from dotenv import load_dotenv
 import requests
 from plotly.express import line
 
+from app.alpha import API_KEY
+from app.email_service import send_email
+
 from email_service import send_email
+
+
+def format_pct(my_number):
+    """
+    Formats a percentage number like 3.6555554 as percent, rounded to two decimal places.
+
+    Param my_number (float) like 3.6555554
+
+    Returns (str) like '3.66%'
+    """
+    return f"{my_number:.2f}%"
 
 print("BACK IN UNEMPLOYMENT FILE")
 
 
 # ENVIRONMENT VARIABLES AND CONSTANTS
 
-load_dotenv() # go look in the .env file for any env vars
 
-API_KEY = os.getenv("ALPHAVANTAGE_API_KEY")
 
 #breakpoint()
 
