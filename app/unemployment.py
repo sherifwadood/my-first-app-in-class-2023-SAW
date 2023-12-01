@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 import requests
 from plotly.express import line
 
+from app.alpha import API_KEY
 from app.email_service import send_email
 
 def format_pct(my_number):
@@ -27,9 +28,7 @@ print("BACK IN UNEMPLOYMENT FILE")
 
 # ENVIRONMENT VARIABLES AND CONSTANTS
 
-load_dotenv() # go look in the .env file for any env vars
 
-API_KEY = os.getenv("ALPHAVANTAGE_API_KEY")
 
 #breakpoint()
 
