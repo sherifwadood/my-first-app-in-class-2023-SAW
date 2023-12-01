@@ -1,24 +1,93 @@
+
+# todo: write some python code here
+
+#Image Examples
+
+
+from IPython.display import Image, display
+
+print("-----------")
+print("EXAMPLE IMAGES:")
+
+print("-----------")
+image_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Georgetown_Hoyas_logo.svg/64px-Georgetown_Hoyas_logo.svg.png"
+display(Image(url=image_url))
+
+print("-----------")
+display(Image(url="https://www.python.org/static/community_logos/python-powered-w-200x80.png"))
+
+print("-----------")
+display(Image(url="https://api.weather.gov/icons/land/day/sct?size=medium"))
+
+
+
+
+DEGREE_SIGN = u"\N{DEGREE SIGN}"
+print(f"THE TEMPERATURE IS 90 {DEGREE_SIGN}F")
+
+import pgeocode
+
+nomi = pgeocode.Nominatim('US')
+results = nomi.query_postal_code("20057")
+
+print(results)
+print(type(results))
+
+print("LOCATION:", f"{results['place_name']}, {results['state_code']}")
+print("LAT:", results["latitude"])
+print("LON:", results["longitude"])
+
+zip_code = input("Please input a zip code (e.g. '06510'): ") or "06510"
+print("ZIP CODE:", zip_code)
+
 from pgeocode import Nominatim
+
+nomi = Nominatim('US')
+geo = nomi.query_postal_code(zip_code)
+print("LOCATION INFO:")
+print(geo)
 
 import requests
 import json
 
-from pandas import DataFrame
+latitude = geo["latitude"]
+longitude = geo["longitude"]
 
-# display images in a dataframe in colab
-# ... h/t: https://towardsdatascience.com/rendering-images-inside-a-pandas-dataframe-3631a4883f6
-from IPython.core.display import HTML
+request_url = f"https://api.weather.gov/points/{latitude},{longitude}"
+print(request_url)
+response = requests.get(request_url)
+parsed_response = json.loads(response.text)
+
+print(response.status_code)
+#parsed_response
+
+forecast_url = parsed_response["properties"]["forecast"]
+print(forecast_url)
+
+forecast_response = requests.get(forecast_url)
+parsed_forecast_response = json.loads(forecast_response.text)
+#parsed_forecast_response
+
+periods = parsed_forecast_response["properties"]["periods"]
+#print(len(periods))
+
+daytime_periods = [period for period in periods if period["isDaytime"] == True]
+#print(len(daytime_periods))
+
+for period in daytime_periods:
+    #print(period.keys())
+    print("-------------")
+    print(period["name"], period["startTime"][0:7])
+    print(period["shortForecast"], f"{period['temperature']} {DEGREE_SIGN}{period['temperatureUnit']}")
+    #print(period["detailedForecast"])
+    display(Image(url=period["icon"]))
+
+    from pgeocode import Nominatim
+import requests
+import json
 
 
-def to_image(url):
-    return '<img src="'+ url + '" width="32" >'
-
-
-def chopped_date(start_time):
-    return start_time[5:10]
-
-
-def forecast_demo(zip_code, country_code="US"):
+def display_forecast(zip_code, country_code="US"):
     """
     Displays a seven day weather forecast for the provided zip code.
 
@@ -29,6 +98,7 @@ def forecast_demo(zip_code, country_code="US"):
         zip_code (str) a valid US zip code, like "20057" or "06510".
 
     """
+
     nomi = Nominatim(country_code)
     geo = nomi.query_postal_code(zip_code)
     latitude = geo["latitude"]
@@ -47,46 +117,12 @@ def forecast_demo(zip_code, country_code="US"):
     periods = parsed_forecast_response["properties"]["periods"]
     daytime_periods = [period for period in periods if period["isDaytime"] == True]
 
-    #for period in daytime_periods:
-    #    #print(period.keys())
-    #    print("-------------")
-    #    print(period["name"], period["startTime"][0:7])
-    #    print(period["shortForecast"], f"{period['temperature']} {degree_sign}{period['temperatureUnit']}")
-    #    #print(period["detailedForecast"])
-    #    display(Image(url=period["icon"]))
+    for period in daytime_periods:
+        #print(period.keys())
+        print("-------------")
+        print(period["name"], period["startTime"][0:7])
+        print(period["shortForecast"], f"{period['temperature']} {DEGREE_SIGN}{period['temperatureUnit']}")
+        #print(period["detailedForecast"])
+        display(Image(url=period["icon"]))
 
-
-    df = DataFrame(daytime_periods)
-
-    df["date"] = df["startTime"].apply(chopped_date)
-
-    # df["img"] = df["icon"].apply(to_image)
-
-    # combined column for temp display
-    # ... h/t: https://stackoverflow.com/questions/19377969/combine-two-columns-of-text-in-pandas-dataframe
-    df["temp"] = df["temperature"].astype(str) + " " + degree_sign + df["temperatureUnit"]
-
-    # rename cols:
-    df.rename(columns={
-        "name":"day",
-        "shortForecast": "forecast"
-    }, inplace=True)
-
-    # drop unused cols:
-    df.drop(columns=[
-        "temperature", "temperatureUnit", "temperatureTrend",
-        "windSpeed", "windDirection",
-        "startTime", "endTime",
-        "number", "isDaytime", "detailedForecast"
-    ], inplace=True)
-
-    # re-order columns:
-    df = df.reindex(columns=['day', 'date', 'temp', 'forecast', 'icon'])
-
-    # return df
-    print("---")
-    print("SEVEN DAY FORECAST")
-    print("LOCATION:", f"{geo.place_name}, {geo.state_code}".upper())
-    print("---")
-    return HTML(df.to_html(escape=False, formatters=dict(icon=to_image)))
 
