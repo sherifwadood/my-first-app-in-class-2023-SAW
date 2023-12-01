@@ -13,7 +13,6 @@ pytest
 
 pgeocode
 
-Flask
+flask
 
-sendgrid
 
