@@ -1,5 +1,5 @@
 import os
-
+import sendgrid
 from dotenv import load_dotenv 
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail

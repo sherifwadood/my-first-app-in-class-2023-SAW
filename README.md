@@ -1,60 +1,50 @@
+# unemployment-inclass-summer-2023
 
-# my-first-app-in-class-2023-SAW
+![tests](https://github.com/s2t2/unemployment-2023-testing-prep/actions/workflows/python-app.yml/badge.svg)
 
 ## Setup
 
-Create and activate a virtual environment:
-```sh
-conda create -n my-first-env python=3.10
+Obtain an [AlphaVantage API Key](https://www.alphavantage.co/support/#api-key). A normal key should be fine, but alternatively you can use one of the prof's "premium" keys. Then create a file called ".env" and place it inside (like the following example):
 
-conda activate my-first-env
+```sh
+# this is the ".env" file (in the root directory of the repo)
+
+ALPHAVANTAGE_API_KEY="____________"
 ```
 
-Install packages:
+Create a virtual environment:
 
-'''sh
+```sh
+conda create -n unemployment-env python=3.10
+```
+
+```sh
+conda activate unemployment-env
+```
+
+Install third-party packages:
+
+```sh
 pip install -r requirements.txt
-''
-##Usage
-
-
-Obtain an [API Key from Alphavantage](https://www.alphavantage.co/support/#api-key) or from the prof (`ALPHAVANTAGE_API_KEY`).
-
-Create a ".env" file and past ein the following contents:
-
-'''sh
-
-ALPHAVANTAGE_API_KEY="_____"
-'''
-## Usage
-
-Run the example script:
-
-```sh
-python app/my_script.py
 ```
+
+## Usage
 
 Run the unemployment report:
 
-'''sh
-python app/unemployment.py
-'''
-
-#API KEY
-
-
-Send an example email:
-
-'''sh
-python app/email_service.py
-'''
-
-
+```sh
 python -m app.unemployment
+```
 
-### Web App
 
-Run the web app (then view in the browser at http://localhost:5000/):
+Run the stocks report:
+
+```sh
+python -m app.stocks
+```
+
+
+Run the web app:
 
 ```sh
 # Mac OS:
@@ -62,18 +52,17 @@ FLASK_APP=web_app flask run
 
 # Windows OS:
 # ... if `export` doesn't work for you, try `set` instead
-# ... or set FLASK_APP variable via ".env" file
+# ... or try a ".env" file approach
 export FLASK_APP=web_app
 flask run
 ```
 
 
-
 ## Testing
-
-Run tests:
 
 ```sh
 pytest
 ```
 
+
+## [Deployment Guide](/DEPLOYING.md)
