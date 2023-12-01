@@ -12,6 +12,16 @@ from plotly.express import line
 
 from app.email_service import send_email
 
+def format_pct(my_number):
+    """
+    Formats a percentage number like 3.6555554 as percent, rounded to two decimal places.
+
+    Param my_number (float) like 3.6555554
+
+    Returns (str) like '3.66%'
+    """
+    return f"{my_number:.2f}%"
+
 print("BACK IN UNEMPLOYMENT FILE")
 
 
